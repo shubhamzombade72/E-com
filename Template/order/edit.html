@@ -1,0 +1,52 @@
+{% include "components/header.html" %}
+{% include "components/sidebar.html" %}
+
+<div class="container-fluid mt-4">
+    <h2 class="mb-4">Edit Order</h2>
+    <form action="/update-order" method="POST">
+        <div class="mb-3">
+            <label for="customerName" class="form-label">Customer Name</label>
+            <input type="text" id="customerName" name="customer_name" class="form-control" placeholder="Enter customer name" required>
+        </div>
+        <div class="mb-3">
+            <label for="customerEmail" class="form-label">Customer Email</label>
+            <input type="email" id="customerEmail" name="customer_email" class="form-control" placeholder="Enter customer email" required>
+        </div>
+        <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input type="tel" id="phoneNumber" name="phone_number" class="form-control" placeholder="Enter phone number" required>
+        </div>
+        <div class="mb-3">
+            <label for="orderStatus" class="form-label">Order Status</label>
+            <select id="orderStatus" name="order_status" class="form-select" required>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Enter quantity" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" name="price" class="form-control" placeholder="Enter price" step="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="orderDate" class="form-label">Order Date</label>
+            <input type="date" id="orderDate" name="order_date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="paymentMethod" class="form-label">Payment Method</label>
+            <select id="paymentMethod" name="payment_method" class="form-select" required>
+                <option value="COD">COD</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Online Payment">Online Payment</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+
+{% include "components/footer.html" %}
+    

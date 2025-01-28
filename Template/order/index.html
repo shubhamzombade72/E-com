@@ -1,0 +1,85 @@
+{% include "components/header.html" %}
+{% include "components/sidebar.html" %}
+
+<div class="container-fluid ">
+    <div class="row ">
+    <h2 class="mb-3 col-md-6">Orders List</h2>
+    <div class="col-md-6">
+        <a href="/order-add/">
+    <button class="btn btn-label-success  btn-round btn-round ms-auto float-end " data-bs-toggle="modal" data-bs-target="#addRowModal">
+        <i class="fa fa-plus "></i>
+        Add Order
+      </button>
+      </a>
+    </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover" style="background-color: #ffffff;cursor: pointer;">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Customer Email</th>
+                    <th>Phone Number</th>
+                    <th>Order Date</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Amount</th>
+                    <th>Order Status</th>
+                    <th>Payment Method</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in orderData %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.customer_name }}</td>
+                    <td>{{ i.customer_email }}</td>
+                    <td>{{ i.phone_number }}</td>
+                    <td>{{ i.order_date }}</td>
+                    <td>{{ i.quantity }}</td>
+                    <td>{{ i.price }}</td>
+                    <td>{{ i.total_amount }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if i.status == 'Pending' %}bg-warning
+                            {% elif i.status == 'Completed' %}bg-success
+                            {% elif i.status == 'Cancelled' %}bg-danger
+                            {% elif i.status == 'Returned' %}bg-secondary
+                            {% endif %}
+                        ">
+                            {{ i.status }}
+                        </span>
+                    </td>
+                    <td>{{ i.payment_method }}</td>
+                    <td>
+                        <a href="/order-view/{{ i.id }}">
+                            <button type="button" class="btn btn-link btn-success">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </a>
+                        <a href="/order-delete/{{ i.id }}">
+                            <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </a>
+                        <a href="/order-edit/{{ i.id }}">
+                            <button type="button" class="btn btn-link btn-info">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="11" class="text-center">No Orders Found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+
+{% include "components/footer.html" %}

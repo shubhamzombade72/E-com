@@ -1,0 +1,101 @@
+{% include "components/header.html" %}
+{% include "components/sidebar.html" %}
+
+<div class="container-fluid mt-4">
+    <h2 class="mb-3">Orders List</h2>
+    <div class="card mb-4">
+        <div class="card-header text-white" style="background: linear-gradient(45deg, #6a1b9a, #8e44ad);">
+            <h5 class="mb-0">Add New Order</h5>
+        </div>
+        <div class="card-body bg-light">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="customerName" class="form-label text-purple">Customer Name</label>
+                        <input type="text" class="form-control border-purple" id="customerName" value="{{customer_name}}" name="customer_name" placeholder="Enter customer name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="customerEmail" class="form-label text-purple">Customer Email</label>
+                        <input type="email" class="form-control border-purple" id="customerEmail" value="{{customer_email}}" name="customer_email" placeholder="Enter customer email" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="phoneNumber" class="form-label text-purple">Phone Number</label>
+                        <input type="tel" class="form-control border-purple" id="phoneNumber" value="{{phone_number}}" name="phone_number" placeholder="Enter phone number" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="orderStatus" class="form-label text-purple">Order Status</label>
+                        <select id="orderStatus" class="form-select border-purple" name="status"  value="{{status}}" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="quantity" class="form-label text-purple">Quantity</label>
+                        <input type="number" class="form-control border-purple" id="quantity" value="{{quantity}}" name="quantity" min="1" placeholder="Enter quantity" required oninput="calculateTotal()">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="price" class="form-label text-purple">Price</label>
+                        <input type="number" class="form-control border-purple" id="price" value="{{price}}" name="price" step="0.01" placeholder="Enter price" required oninput="calculateTotal()">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="totalAmount" class="form-label text-purple">Total Amount</label>
+                        <input type="number" class="form-control border-purple" id="totalAmount" value="{{total_amount}}" name="total_amount" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="paymentMethod" class="form-label text-purple">Payment Method</label>
+                        <select id="paymentMethod" class="form-select border-purple" name="payment_method" required>
+                            <option value="COD">Cash on Delivery</option>
+                            <option value="Card">Credit/Debit Card</option>
+                            <option value="UPI">UPI</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="orderDate" class="form-label text-purple">Order Date</label>
+                        <input type="date" class="form-control border-purple" id="orderDate" value="{{order_date}}" name="order_date" required>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-purple rounded-pill text-light">Add Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% include "components/footer.html" %}
+<script>
+    function calculateTotal() {
+        const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+        const price = parseFloat(document.getElementById('price').value) || 0;
+        const totalAmount = quantity * price;
+    
+        // Ensure a valid number is always set
+        document.getElementById('totalAmount').value = totalAmount.toFixed(2);
+    }
+    </script>
+    
+
+<style>
+    .text-purple {
+        color: #6a1b9a;
+    }
+    .border-purple {
+        border-color: #8e44ad !important;
+    }
+    .btn-purple {
+        background-color: #6a1b9a;
+        border-color: #8e44ad;
+    }
+    .btn-purple:hover {
+        background-color: #8e44ad;
+        border-color: #6a1b9a;
+    }
+</style>

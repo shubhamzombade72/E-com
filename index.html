@@ -1,0 +1,114 @@
+{% include "components/header.html" %}
+{% include "components/sidebar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0 auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    @media (max-width: 768px) {
+      table {
+        border: 0;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #ddd;
+      }
+
+      td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+      }
+
+      td:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid ms-3">
+  <div class="table-container ">
+    <table class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Product</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Name">29</td>
+          <td data-label="Age">John Doe</td>
+          <td data-label="Job">Developer</td>
+          <td data-label="Location">New York</td>
+          <td data-label="Location">291</td>
+        </tr>
+        <tr>
+          <td data-label="Name">23</td>
+          <td data-label="Age">Jane Smith</td>
+          <td data-label="Job">Designer</td>
+          <td data-label="Location">San Francisco</td>
+          <td data-label="Location">45</td>
+        </tr>
+        <tr>
+          <td data-label="Name">12</td>
+          <td data-label="Name">Michael Brown</td>
+          <td data-label="Age">Chicago</td>
+          <td data-label="Job">Manager</td>
+          <td data-label="Location">321</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
+
+{% include "components/footer.html" %}

@@ -1,0 +1,46 @@
+{% include "components/header.html" %}
+{% include "components/sidebar.html" %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <h2 class="mb-4">Order List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Payment Method</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orderData %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ order.customer_name }}</td>
+                <td>{{ order.customer_email }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.price }}</td>
+                <td>{{ order.total_amount }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.payment_method }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-end mt-3">
+        <a href="/order-list/" class="btn btn-info text-white">
+            <i class="fa fa-arrow-left me-2"></i> Back to Order List
+        </a>
+    </div>
+</div>
+ 
+{% endblock %}
+
+{% include "components/footer.html" %}
